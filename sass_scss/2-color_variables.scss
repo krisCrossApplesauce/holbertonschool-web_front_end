@@ -1,0 +1,12 @@
+$dark_grey: #3D3D3D;
+$light_grey: #6D6D6D;
+
+body {
+	color: #{$dark_grey};
+	background-color: #{$light_grey}; }
+
+p {
+	color: #{$dark_grey}; }
+
+h2 {
+	background-color: #{$light_grey}; }
