@@ -11,7 +11,7 @@ function queryWikipedia(callback) {
 
 	request.onload = function() {
 		let data = JSON.parse(request.responseText);
-		callback(data.query.extract);
+		callback(data.query.pages[21721040].extract);
 	};
 
 	request.send();
