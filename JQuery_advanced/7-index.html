@@ -17,7 +17,7 @@
 			function addNewArticle(id, title, snippet) {
 				$("ul").append($("<li>"));
 				$("li").append($("<p>").append($("<span>").text(id + " -")).append($("<b>").text(title))).append($("<p>"));
-				$("li").append($("<p>").text(snippet));
+				$("li").append($("<p>").append(snippet));
 			}
 
 			function queryWikipedia(search) {
