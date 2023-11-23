@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+
+		<script>
+			var cookie = {};
+
+			function setCookiesAndShowWelcomeMessage() {
+				cookie =  {
+					"firstname": $("#firstname").val(),
+					"email": $("#email").val()
+				};
+				$("body").replace(`<h1>Welcome ${cookie.firstname} </h1>`);
+				$("h1").append($(`<link style="font-weight: italic, font-size 10px">`).text("(logout)").click(function() {
+					deleteCookiesAndShowForm();
+					$("h1").hide();
+					$("form").show();
+				}));
+			}
+
+			function showCookies() {
+				var p = document.createElement("p");
+				p.innerHTML(`Email: ${cookie.email} - Firstname: ${cookie.firstname}`);
+				document.body.appendChild(p);
+			}
+
+			function showForm() {
+				welcomeMessage.remove();
+				$("form").show();
+			}
+
+			function hideForm() {
+				$("form").hide();
+			}
+
+			function deleteCookiesAndShowForm() {
+				js-cookie();
+				showForm();
+			}
+
+			cookie.expireInTenDays();
+		</script>
+	</head>
+
+	<body>
+		<div>
+			<h2></h2>
+			<input id="firstname">
+			<input id="email">
+			<button onclick="setCookies()">Log me in</button>
+		</div>
+	</body>
+</html>
