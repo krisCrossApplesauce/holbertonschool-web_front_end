@@ -17,9 +17,19 @@
 
 			function showCookies() {
 				var p = document.createElement("p");
-				p.innerHTML(`Cookies: ${cookie}`);
+				p.innerHTML(`Email: ${cookie.email} - Firstname: ${cookie.firstname}`);
 				document.body.appendChild(p);
 			}
+
+			function getCookie(name) {
+				if (cookie.name) {
+					return (cookie.name);
+				} else {
+					return ("");
+				}
+			}
+
+			cookie.expireInTenDays();
 		</script>
 	</head>
 
