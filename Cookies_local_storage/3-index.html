@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+
+		<script>
+			var cookie = {};
+
+			function setCookies() {
+				cookie =  {
+					"firstname": $("#firstname").val(),
+					"email": $("#email").val()
+				};
+			}
+
+			function showCookies() {
+				var p = document.createElement("p");
+				p.innerHTML(`Email: ${cookie.email} - Firstname: ${cookie.firstname}`);
+				document.body.appendChild(p);
+			}
+
+			function getCookie(name) {
+				if (cookie.name) {
+					return (cookie.name);
+				} else {
+					return ("");
+				}
+			}
+
+			function showForm() {
+				welcomeMessage.remove();
+				$("form").show();
+			}
+
+			function hideForm() {
+				$("form").hide();
+			}
+
+			function deleteCookiesAndShowForm() {
+				cookie.remove();
+				showForm();
+			}
+
+			function showWelcomeMessageOrForm() {
+				if (user.loggedin) {
+					showForm();
+				} else {
+					$("body").replace(`<h1>Welcome ${cookie.firstname} </h1>`);
+					$("h1").append($(`<link style="font-weight: italic, font-size 10px">`).text("(logout)").click(function() {
+						deleteCookiesAndShowForm();
+						$("h1").hide();
+						$("form").show();
+					}));
+				}
+			}
+
+			cookie.expireInTenDays();
+		</script>
+	</head>
+
+	<body>
+		<div>
+			<h2></h2>
+			<input id="firstname">
+			<input id="email">
+			<button onclick="setCookies()">Log me in</button>
+		</div>
+	</body>
+</html>
