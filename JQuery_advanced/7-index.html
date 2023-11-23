@@ -15,9 +15,7 @@
 			}
 
 			function addNewArticle(id, title, snippet) {
-				$("ul").append($("<li>"));
-				$("li").append($("<p>").append($("<span>").text(id + " -")).append($("<b>").text(title))).append($("<p>"));
-				$("li").append($("<p>").append(snippet));
+				$("ul:nth-of-type(1)").append($("<li>").append($("<p>").append($("<span>").text(id + " -")).append($("<b>").text(title))).append($("<p>").append(snippet)));
 			}
 
 			function queryWikipedia(search) {
