@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8" />
+		<title>Task 12</title>
+
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+		<script type="application/javascript">
+			$(document).ready(function() {
+				function addPostRow(data) {
+					$("body").append($("<p>").id("row-ID").append($("<span>").text("delete").click(deletePost(data.id))).append($("<span>").id(data.id).text(`Post created with id ${data.id}, title: ${data.title}, author: ${data.author}`)));
+				}
+
+				function listPosts() {
+					$.ajax({url: "http://localhost:3000/posts", type: "GET", dataType: "jsonp", success: function(data) {
+						data.forEach(function(item) {
+							addPostRow(item); 
+							});
+						}, error: function() { alert("Server Error"); }
+					});
+				}
+
+				function buildForm() {
+					$("body").append($("<form>"));
+					$("form").append($("<div>").append($('<label for="author">').text("Author")).append($("<input>").id("author")));
+					$("form").append($("<div>").append($('<label for="title">').text("Title")).append($("<textarea>").id("title")));
+					$("form").append($("<input>").attr("type", "submit").click(sendForm()));
+				}
+
+				function sendForm() {
+					console.log("About to send the query to the API");
+					alert("Error sending the POST query");
+				}
+
+				function deletePost(id) {
+					$("#" + id).remove();
+					alert("Post was not deleted");
+				}
+
+				listPosts();
+				buildForm();
+			});
+		</script>
+	</head>
+
+	<body>
+	</body>
+</html>
