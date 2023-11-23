@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 	<head>
 		<meta charset="utf-8" />
-		<title>Task 10</title>
+		<title>Task 11</title>
 
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 		<script type="application/javascript">
@@ -20,7 +20,20 @@
 					});
 				}
 
+				function buildForm() {
+					$("body").append($("<form>"));
+					$("form").append($("<div>").append($('<label for="author">').text("Author")).append($("<input>").id("author")));
+					$("form").append($("<div>").append($('<label for="title">').text("Title")).append($("<textarea>").id("title")));
+					$("form").append($("<input>").attr("type", "submit").click(sendForm()));
+				}
+
+				function sendForm() {
+					console.log("About to send the query to the API");
+					alert("Error sending the POST query");
+				}
+
 				listPosts();
+				buildForm();
 			});
 		</script>
 	</head>
