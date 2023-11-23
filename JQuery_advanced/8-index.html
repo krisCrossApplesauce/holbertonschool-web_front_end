@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8" />
+		<title>Task 8</title>
+
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+		<script type="application/javascript">
+			function createSearchForm() {
+				$("body").append($("<input>"));
+				$("body").append($("<input>").attr("type", "submit").click(function() {
+					queryWikipedia($("input:nth-of-type(1)").val());
+				}));
+				$("body").append($("<ul>"));
+				$("body").append($("<ul id='pagination'>"));
+			}
+
+			function addNewArticle(id, title, snippet) {
+				$("ul:nth-of-type(1)").append($("<li>"));
+				$("li").append($("<p>").append($("<span>").text(id + " -")).append($("<b>").text(title)));
+				$("li").append($("<p>").append(snippet));
+			}
+
+			function queryWikipedia(search, offset = 0) {
+				$("ul:nth-of-type(1)").empty();
+				$.ajax({url: `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${search}&format=json`, type: "GET", dataType: "jsonp", success: function(data) {
+					data.query.search.forEach(function(article) {
+						addNewArticle(article.pageid, article.title, article.snippet);
+					});
+					buildPagination(data.query.searchinfo.totalhits, 10, offset);
+				}});
+			}
+
+			function buildPagination(numberOfItems, itemsPerPage, currentOffset) {
+				const numOfPages = Math.floor((numberOfItems - 1) / itemsPerPage);
+				const pageNum = Math.ceil(currentOffset / itemsPerPage);
+
+				$("#pagination").empty();
+				for (let i = 0; i < numOfPages; i++) {
+					$("#pagination").append($("<li>").css({
+						"cursor": "pointer",
+						"margin-left": "10px",
+						"display": "inline"
+					}).text(i + 1).click(function() {
+						queryWikipedia($("input:nth-of-type(1)").val(), ($(this).text() - 1) * itemsPerPage);
+					}));
+					if (i == pageNum) {
+						$("#pagination li").last().css({"font-weight": "bold"});
+					}
+				}
+				$("#pagination").children().css({"list-style-type": "none"});
+			}
+
+			$(document).ready(function() {
+				createSearchForm();
+			});
+		</script>
+	</head>
+
+	<body>
+	</body>
+</html>
