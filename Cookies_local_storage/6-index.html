@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+
+		<script>
+			document.ready(function() {
+				var availableItems = ["Shampoo", "Soap", "Sponge", "Water"];
+
+				if (!(sessionStorage)) {
+					alert("Sorry, your browser does not support Web storage. Try again with a better one");
+				} else {
+					createStore();
+					displayCart();
+				}
+
+				function addItemToCart(item) {
+					availableItems.append((item).val(true));
+				}
+
+				function createStore() {
+					var ul = document.createElement("ul");
+					for (i in availableItems) {
+						ul.append($("<li>").text(i.name).click(function() {
+							addItemToCart(i);
+						}));
+					}
+				}
+
+				function displayCart() {
+					if (sessionStorage != {}) {
+						var p = document.createElement("p");
+						p.textContent(`You previously had ${sessionStorage.lenth()} items in your cart`);
+						document.body.appendChild(p);
+					}
+				}
+			});
+		</script>
+	</head>
+
+	<body>
+		<div>
+		</div>
+	</body>
+</html>
